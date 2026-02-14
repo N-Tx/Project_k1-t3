@@ -36,6 +36,8 @@ public class Main {
 
                     System.out.print("Prioridade (1-5): ");
                     int pri = scanner.nextInt();
+                    scanner.nextLine();
+
 
                     System.out.print("Categoria ");
                     String category = scanner.nextLine();
@@ -48,13 +50,20 @@ public class Main {
                     service.addTask(novaTask);
                     break;
                 case 2:
-                    service.listAll();
+                    System.out.print("Qual prioridade (1-5)? ");
+                    int p = scanner.nextInt();
+                    scanner.nextLine();
+                    service.listPriority(p);
                     break;
                 case 3:
-                    service.listCategory();
+                    System.out.print("Qual categoria? ");
+                    String cat = scanner.nextLine();
+                    service.listCategory(cat);
                     break;
                 case 4:
-                    //service.listStatus(); // RESOLVE ESSE B.O
+                    System.out.print("Qual status? (TODO/DOING/DONE) ");
+                    String st = scanner.nextLine();
+                    service.listStatus(st);
                     break;
 
                 case 0:

@@ -36,14 +36,15 @@ public class ServiceTasks {
 
     }
 
-    public void listCategory() {
+    public void listCategory(String cat) {
         for (Task t : tasks) {
             System.out.println(t.getCategory() + " -> " + t);
+
         }
     }
-    public void listPriority(String priority) {
+    public void listPriority(int priority) {
         for (Task t : tasks) {
-            if (t.getCategory().equalsIgnoreCase(priority)) {
+            if (t.getLevel_priority() == priority) {
                 System.out.println(t);
             }
         }
