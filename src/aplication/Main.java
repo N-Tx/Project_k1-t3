@@ -2,6 +2,8 @@ package aplication;
 
 import service.ServiceTasks;
 import entity.Task;
+import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -9,7 +11,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ServiceTasks service = new ServiceTasks();
         boolean running = true;
-
+        LocalDate date = null;
         while (running) {
             System.out.println("\n--- ZG HERO TODO LIST ---");
             System.out.println("1. Adicionar Tarefa");
@@ -35,8 +37,26 @@ public class Main {
                     System.out.print("Descrição: ");
                     String description = scanner.nextLine();
 
-                    System.out.print("Data (ddmmaa): ");
-                    String date = scanner.nextLine();
+
+                    while (true) {
+                        try {
+                            System.out.print("Quantos dias para terminar? ");
+                            int dias = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if (dias > 0) {
+                                date = LocalDate.now().plusDays(dias);
+                                break; // agora sim — sai só do while
+                            } else {
+                                System.out.println("Digite um número maior que 0.");
+                            }
+
+                        } catch (Exception e) {
+                            System.out.println("Erro: Digite apenas números!");
+                            scanner.nextLine(); // limpa entrada inválida
+                        }
+                    }
+
 
                     int pri = 0;
                     while (true) {
@@ -107,8 +127,7 @@ public class Main {
                     service.listAll();
 
                     System.out.print("Digite o nome da tarefa: ");
-                    String index = scanner.next();
-                    scanner.nextLine();
+                    String index = scanner.nextLine();
 
                     System.out.print("Qual o novo status? (TODO, DOING, DONE): ");
                     String novoStatus = scanner.nextLine();

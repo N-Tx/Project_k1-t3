@@ -1,22 +1,26 @@
 package entity;
 
+
+import java.time.LocalDate;
+
 public class Task {
 
     private String name;
     private String description;
-    private String deadline;
+    private LocalDate deadline;
     private int level_priority;
     private String category;
     private String status;
 
 
-    public Task(String name, String description, String deadline, int priority, String category, String status) {
+    public Task(String name, String description, LocalDate deadline, int priority, String category, String status) {
         this.name = name;
         this.description = description;
         this.deadline = deadline;
         this.level_priority = priority;
         this.category = category;
         this.status = status;
+
     }
     @Override
     public String toString() {
@@ -49,11 +53,11 @@ public class Task {
         this.description = description;
     }
 
-    public String getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
