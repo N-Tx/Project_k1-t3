@@ -86,6 +86,10 @@ button {
     margin-bottom: 1rem;
 }
 
+.list-header select{
+margin-left:10px;
+}
+
 #task-list {
     list-style: none;
     display: flex;

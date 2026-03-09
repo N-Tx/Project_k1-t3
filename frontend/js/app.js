@@ -7,11 +7,18 @@ const form = document.getElementById('task-form');
 const titleInput = document.getElementById('title');
 const descInput = document.getElementById('description');
 const statusInput = document.getElementById('status');
+
+const priorityInput = document.getElementById('priority'); // 
+const categoryInput = document.getElementById('category'); // 
+
 const submitBtn = document.getElementById('submit-btn');
 const cancelBtn = document.getElementById('cancel-btn');
 const formTitle = document.getElementById('form-title');
 const taskList = document.getElementById('task-list');
 const filterStatus = document.getElementById('filter-status');
+
+const filterPriority = document.getElementById('filter-priority'); 
+const filterCategory = document.getElementById('filter-category'); 
 
 // Event Listeners
 form.addEventListener('submit', handleFormSubmit);
