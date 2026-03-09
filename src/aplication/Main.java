@@ -46,14 +46,14 @@ public class Main {
 
                             if (dias > 0) {
                                 date = LocalDate.now().plusDays(dias);
-                                break; // agora sim — sai só do while
+                                break;
                             } else {
                                 System.out.println("Digite um número maior que 0.");
                             }
 
                         } catch (Exception e) {
                             System.out.println("Erro: Digite apenas números!");
-                            scanner.nextLine(); // limpa entrada inválida
+                            scanner.nextLine();
                         }
                     }
 
