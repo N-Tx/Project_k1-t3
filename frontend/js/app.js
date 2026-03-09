@@ -37,7 +37,7 @@ function handleFormSubmit(e) {
     } else {
         // Cria nova tarefa com ID único baseado no timestamp
         const newTask = { id: Date.now(), ...taskData };
-        tasks.push(newTask);
+        tasks.unshift(newTask);
     }
 
     resetForm();

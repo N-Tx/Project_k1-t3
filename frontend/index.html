@@ -20,6 +20,20 @@
                     <option value="DOING">DOING (Fazendo)</option>
                     <option value="DONE">DONE (Feito)</option>
                 </select>
+                <select id="priority">
+                    <option value="1">Prioridade 1</option>
+                    <option value="2">Prioridade 2</option>
+                    <option value="3">Prioridade 3</option>
+                    <option value="4">Prioridade 4</option>
+                    <option value="5">Prioridade 5</option>
+                </select>
+
+                <select id="category">
+                    <option value="WORK">Trabalho</option>
+                    <option value="STUDY">Estudo</option>
+                    <option value="PERSONAL">Pessoal</option>
+                </select>
+
                 <div class="form-actions">
                     <button type="submit" id="submit-btn">Salvar Tarefa</button>
                     <button type="button" id="cancel-btn" class="hidden">Cancelar Edição</button>
@@ -37,6 +51,23 @@
                     <option value="DOING">DOING</option>
                     <option value="DONE">DONE</option>
                 </select>
+                <select id="filter-priority">
+                    <option value="ALL">Todas Prioridades</option>
+                    <option value="1">Prioridade 1</option>
+                    <option value="2">Prioridade 2</option>
+                    <option value="3">Prioridade 3</option>
+                    <option value="4">Prioridade 4</option>
+                    <option value="5">Prioridade 5</option>
+                </select>
+                
+                <select id="filter-category">
+                    <option value="ALL">Todas Categorias</option>
+                    <option value="WORK">Trabalho</option>
+                    <option value="STUDY">Estudo</option>
+                    <option value="PERSONAL">Pessoal</option>
+                </select>
+
+                </div>
             </div>
             <ul id="task-list"></ul>
         </div>
