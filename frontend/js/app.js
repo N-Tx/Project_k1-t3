@@ -23,17 +23,26 @@ const filterCategory = document.getElementById('filter-category');
 // Event Listeners
 form.addEventListener('submit', handleFormSubmit);
 cancelBtn.addEventListener('click', resetForm);
+
 filterStatus.addEventListener('change', renderTasks);
+
+filterPriority.addEventListener('change', renderTasks); // ⭐ ADICIONAR
+filterCategory.addEventListener('change', renderTasks); // ⭐ ADICIONAR
 
 // (C) e (U) - Criar ou Atualizar Tarefa
 function handleFormSubmit(e) {
     e.preventDefault();
 
     const taskData = {
-        title: titleInput.value,
-        description: descInput.value,
-        status: statusInput.value
-    };
+
+    title: titleInput.value,
+    description: descInput.value,
+    status: statusInput.value,
+
+    priority: priorityInput.value, // ⭐ NOVO
+    category: categoryInput.value  // ⭐ NOVO
+
+};
 
     if (editingId) {
         // Atualiza a tarefa existente
@@ -61,6 +70,9 @@ function editTask(id) {
     descInput.value = task.description;
     statusInput.value = task.status;
     
+    priorityInput.value = task.priority; // ⭐ NOVO
+    categoryInput.value = task.category; // ⭐ NOVO
+    
     editingId = id;
     
     // Altera o visual do formulário
@@ -86,34 +98,68 @@ function resetForm() {
     cancelBtn.classList.add('hidden');
 }
 
-// (R) - Renderizar as tarefas (com filtro opcional aplicado)
-function renderTasks() {
-    taskList.innerHTML = '';
-    const filterValue = filterStatus.value;
+// renderizar tarefas
+function renderTasks(){
 
-    const filteredTasks = filterValue === 'ALL' 
-        ? tasks 
-        : tasks.filter(t => t.status === filterValue);
+taskList.innerHTML = '';
 
-    filteredTasks.forEach(task => {
-        const li = document.createElement('li');
-        li.className = `task-item ${task.status.toLowerCase()}`;
-        
-        li.innerHTML = `
-            <div class="task-content">
-                <h3>${task.title}</h3>
-                <p>${task.description}</p>
-                <span class="task-status">[${task.status}]</span>
-            </div>
-            <div class="task-actions">
-                <button class="edit-btn" onclick="editTask(${task.id})">Editar</button>
-                <button class="delete-btn" onclick="deleteTask(${task.id})">Excluir</button>
-            </div>
-        `;
-        
-        taskList.appendChild(li);
-    });
+const statusFilter = filterStatus.value;
+const priorityFilter = filterPriority.value; // ⭐ NOVO
+const categoryFilter = filterCategory.value; // ⭐ NOVO
+
+
+const filteredTasks = tasks.filter(task =>{
+
+const statusMatch =
+statusFilter === 'ALL' || task.status === statusFilter;
+
+const priorityMatch =
+priorityFilter === 'ALL' || task.priority === priorityFilter; // ⭐ NOVO
+
+const categoryMatch =
+categoryFilter === 'ALL' || task.category === categoryFilter; // ⭐ NOVO
+
+return statusMatch && priorityMatch && categoryMatch;
+
+});
+
+
+filteredTasks.forEach(task =>{
+
+const li = document.createElement('li');
+
+li.className = `task-item ${task.status.toLowerCase()}`;
+
+li.innerHTML = `
+
+<div>
+
+<h3>${task.title}</h3>
+
+<p>${task.description}</p>
+
+<span class="task-status">
+
+[${task.status}] | Prioridade: ${task.priority} | Categoria: ${task.category} <!-- ⭐ NOVO -->
+
+</span>
+
+</div>
+
+<div class="task-actions">
+
+<button class="edit-btn" onclick="editTask(${task.id})">Editar</button>
+
+<button class="delete-btn" onclick="deleteTask(${task.id})">Excluir</button>
+
+</div>
+
+`;
+
+taskList.appendChild(li);
+
+});
+
 }
 
-// Renderização inicial
 renderTasks();
