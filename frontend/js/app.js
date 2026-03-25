@@ -1,16 +1,14 @@
-// Estado da aplicação
+
 let tasks = [];
 let editingId = null;
 
-// Captura de elementos do DOM
 const form = document.getElementById('task-form');
 const titleInput = document.getElementById('title');
 const descInput = document.getElementById('description');
 const statusInput = document.getElementById('status');
 
-const priorityInput = document.getElementById('priority'); // 
-const categoryInput = document.getElementById('category'); // 
-
+const priorityInput = document.getElementById('priority');
+const categoryInput = document.getElementById('category'); 
 const submitBtn = document.getElementById('submit-btn');
 const cancelBtn = document.getElementById('cancel-btn');
 const formTitle = document.getElementById('form-title');
@@ -26,10 +24,10 @@ cancelBtn.addEventListener('click', resetForm);
 
 filterStatus.addEventListener('change', renderTasks);
 
-filterPriority.addEventListener('change', renderTasks); // ⭐ ADICIONAR
-filterCategory.addEventListener('change', renderTasks); // ⭐ ADICIONAR
+filterPriority.addEventListener('change', renderTasks); 
+filterCategory.addEventListener('change', renderTasks); 
 
-// (C) e (U) - Criar ou Atualizar Tarefa
+// aqui estou criando e att tarefas
 function handleFormSubmit(e) {
     e.preventDefault();
 
@@ -39,19 +37,19 @@ function handleFormSubmit(e) {
     description: descInput.value,
     status: statusInput.value,
 
-    priority: priorityInput.value, // ⭐ NOVO
-    category: categoryInput.value  // ⭐ NOVO
+    priority: priorityInput.value, 
+    category: categoryInput.value  
 
 };
 
     if (editingId) {
-        // Atualiza a tarefa existente
-        const index = tasks.findIndex(t => t.id === editingId);
+        
+        const index = tasks.findIndex(t => t.id === editingId); // retorna a posição do objeto q quer
         if (index !== -1) {
             tasks[index] = { ...tasks[index], ...taskData };
         }
     } else {
-        // Cria nova tarefa com ID único baseado no timestamp
+        // cria nova tarefa com ID único como um primarykey
         const newTask = { id: Date.now(), ...taskData };
         tasks.unshift(newTask);
     }
@@ -60,28 +58,26 @@ function handleFormSubmit(e) {
     renderTasks(); 
 }
 
-// Preparar formulário para edição
 function editTask(id) {
     const task = tasks.find(t => t.id === id);
     if (!task) return;
 
-    // Preenche o formulário com os dados da tarefa selecionada
+    
     titleInput.value = task.title;
     descInput.value = task.description;
     statusInput.value = task.status;
     
-    priorityInput.value = task.priority; // ⭐ NOVO
-    categoryInput.value = task.category; // ⭐ NOVO
+    priorityInput.value = task.priority; 
+    categoryInput.value = task.category; 
     
     editingId = id;
     
-    // Altera o visual do formulário
     formTitle.textContent = 'Editando Tarefa';
     submitBtn.textContent = 'Atualizar Tarefa';
     cancelBtn.classList.remove('hidden');
 }
 
-// (D) - Excluir Tarefa
+
 function deleteTask(id) {
     if(confirm('Tem certeza que deseja excluir esta tarefa?')) {
         tasks = tasks.filter(t => t.id !== id);
@@ -89,7 +85,6 @@ function deleteTask(id) {
     }
 }
 
-// Restaura o formulário para o estado de criação
 function resetForm() {
     form.reset();
     editingId = null;
@@ -98,14 +93,13 @@ function resetForm() {
     cancelBtn.classList.add('hidden');
 }
 
-// renderizar tarefas
 function renderTasks(){
 
 taskList.innerHTML = '';
 
 const statusFilter = filterStatus.value;
-const priorityFilter = filterPriority.value; // ⭐ NOVO
-const categoryFilter = filterCategory.value; // ⭐ NOVO
+const priorityFilter = filterPriority.value; 
+const categoryFilter = filterCategory.value; 
 
 
 const filteredTasks = tasks.filter(task =>{
@@ -114,10 +108,10 @@ const statusMatch =
 statusFilter === 'ALL' || task.status === statusFilter;
 
 const priorityMatch =
-priorityFilter === 'ALL' || task.priority === priorityFilter; // ⭐ NOVO
+priorityFilter === 'ALL' || task.priority === priorityFilter; 
 
 const categoryMatch =
-categoryFilter === 'ALL' || task.category === categoryFilter; // ⭐ NOVO
+categoryFilter === 'ALL' || task.category === categoryFilter; 
 
 return statusMatch && priorityMatch && categoryMatch;
 
@@ -140,7 +134,7 @@ li.innerHTML = `
 
 <span class="task-status">
 
-[${task.status}] | Prioridade: ${task.priority} | Categoria: ${task.category} <!-- ⭐ NOVO -->
+[${task.status}] | Prioridade: ${task.priority} | Categoria: ${task.category}
 
 </span>
 
